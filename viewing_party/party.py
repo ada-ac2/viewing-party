@@ -55,7 +55,11 @@ def get_most_watched_genre(user_data):
         return max(genres, key=genres.get)
     else:
         return None
-
+    
+    
+# -----------------------------------------
+# ------------- WAVE 3 --------------------
+# -----------------------------------------
 def get_unique_watched(user_data):
 
     unique_movies = []
@@ -71,12 +75,6 @@ def get_unique_watched(user_data):
 
     return unique_movies
 
-    
-
-    
-# -----------------------------------------
-# ------------- WAVE 3 --------------------
-# -----------------------------------------
 
         
 # -----------------------------------------
