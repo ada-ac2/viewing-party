@@ -102,3 +102,15 @@ def get_available_recs(user_data):
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
+def get_new_rec_by_genre(user_data):
+
+    possible_recs = get_available_recs(user_data)
+
+    user_genres = set()
+
+    for movie in user_data["watched"]:
+        user_genres.add(movie["genre"])
+    
+    recommendations  = [movie for movie in possible_recs if movie["genre"] in user_genres]
+
+    return recommendations
