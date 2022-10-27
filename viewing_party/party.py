@@ -63,25 +63,29 @@ def get_most_watched_genre(user_data):
 def get_unique_watched(user_data):
 
     unique_movies = []
-    friends_watched_titles = set()
-    for friend in user_data["friends"]:
-        for movie_entry in friend["watched"]:
-            friends_watched_titles.add(movie_entry["title"])
 
-    for movie_entry in user_data["watched"]:
-        if movie_entry["title"] not in friends_watched_titles:
-            unique_movies.append(movie_entry)
+    if len(user_data["watched"]) != 0:
+        friends_watched_titles = set()
+        for friend in user_data["friends"]:
+            for movie_entry in friend["watched"]:
+                friends_watched_titles.add(movie_entry["title"])
+        
+        for movie_entry in user_data["watched"]:
+            if movie_entry["title"] not in friends_watched_titles:
+                unique_movies.append(movie_entry)
 
 
     return unique_movies
 
 def get_friends_unique_watched(user_data):
-
+    
     friends_unique_movies = []
-    for friend in user_data["friends"]:
-        for movie_entry in friend["watched"]:
-            if movie_entry not in user_data["watched"] and movie_entry not in friends_unique_movies:
-                friends_unique_movies.append(movie_entry)
+
+    if len(user_data["watched"]) != 0 and len(user_data["friends"]) != 0:
+        for friend in user_data["friends"]:
+            for movie_entry in friend["watched"]:
+                if movie_entry not in user_data["watched"] and movie_entry not in friends_unique_movies:
+                    friends_unique_movies.append(movie_entry)
 
     return friends_unique_movies
 
@@ -94,7 +98,7 @@ def get_available_recs(user_data):
 
     recommendations = []
 
-    if len(user_data["watched"]) != 0: 
+    if len(user_data["watched"]) != 0 and len(user_data["friends"]) != 0: 
         possible_recs = get_friends_unique_watched(user_data)
 
         recommendations = [movie for movie in possible_recs if movie["host"] in user_data["subscriptions"]]
@@ -117,3 +121,15 @@ def get_new_rec_by_genre(user_data):
     recommendations  = [movie for movie in possible_recs if movie["genre"] in user_genres]
 
     return recommendations
+
+def get_rec_from_favorites(user_data):
+
+    recommendations = []
+
+    if len(user_data["watched"]) != 0: 
+        possible_recs = get_unique_watched(user_data)
+
+        recommendations = [movie for movie in possible_recs if movie in user_data["favorites"]]
+
+    return recommendations
+
