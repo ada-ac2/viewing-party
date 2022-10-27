@@ -92,9 +92,12 @@ def get_friends_unique_watched(user_data):
 
 def get_available_recs(user_data):
 
-    possible_recs = get_friends_unique_watched(user_data)
+    recommendations = []
 
-    recommendations = [movie for movie in possible_recs if movie["host"] in user_data["subscriptions"]]
+    if len(user_data["watched"]) != 0: 
+        possible_recs = get_friends_unique_watched(user_data)
+
+        recommendations = [movie for movie in possible_recs if movie["host"] in user_data["subscriptions"]]
 
     return recommendations
 
