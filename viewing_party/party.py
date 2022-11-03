@@ -100,3 +100,24 @@ def get_available_recs(user_data):
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
+def get_new_rec_by_genre(user_data):
+    reccomendations_by_genere = []
+    if user_data["watched"]:
+        filter_genere = get_most_watched_genre(user_data)
+        if "subscriptions" in user_data.keys():
+            available_recs = get_available_recs(user_data)
+            for movie in available_recs:
+                if movie["genre"] == filter_genere:
+                    reccomendations_by_genere.append(movie)
+    
+    return reccomendations_by_genere
+
+
+def  get_rec_from_favorites(user_data):
+    unique_user_movies = get_unique_watched(user_data)
+    unique_recs_by_faves = []
+    for movie in unique_user_movies:
+        if movie in user_data["favorites"]:
+            unique_recs_by_faves.append(movie)
+    return unique_recs_by_faves
+
