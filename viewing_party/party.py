@@ -71,7 +71,7 @@ def get_watched_avg_rating(user_data) :
     return avg/watched
 
 def get_most_watched_genre(user_data):
-    fav_genre = ""
+    fav_genre = None
     max_watched = 0
     if user_data is None:
         return fav_genre
