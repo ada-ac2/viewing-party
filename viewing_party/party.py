@@ -107,16 +107,17 @@ def get_unique_watched(user_data):
             if movie not in friend["watched"]:
                 title = movie["title"]
                 if title not in uni_titles.keys():
-                    uni_titles[title] = list()
-                    uni_titles[title].append(movie)
+                    uni_titles[title] = dict()
+                    uni_titles[title]["movie"] = movie
+                    uni_titles[title]["unwatched_friends"] = 1
                 else:
-                    uni_titles[title].append(movie)
+                    uni_titles[title]["unwatched_friends"]+=1
 
     user_unique = list()
 
-    for movies in uni_titles.values():
-        if len(movies)==len(friends) :
-            user_unique.append(movies[0]) 
+    for not_watched_movies in uni_titles.values():
+        if not_watched_movies["unwatched_friends"]==len(friends) :
+            user_unique.append(not_watched_movies["movie"]) 
 
     return user_unique              
 
