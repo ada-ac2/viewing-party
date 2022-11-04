@@ -94,15 +94,15 @@ def get_most_watched_genre(user_data):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
-def get_unique_watched(user_data):
-    user_unique = None
-    if user_data is None:
-        return user_unique
+def get_not_watched_by_friends(watched, friends):
+    if watched is None or friends is None:
+        return None
 
-    friends = user_data["friends"]
-    user_movies = user_data["watched"]
+    if friends==[]:
+        return watched
+
     uni_titles = dict()
-    for movie in user_movies:
+    for movie in watched:
         for friend in friends:
             if movie not in friend["watched"]:
                 title = movie["title"]
@@ -114,12 +114,22 @@ def get_unique_watched(user_data):
                     uni_titles[title]["unwatched_friends"]+=1
 
     user_unique = list()
-
     for not_watched_movies in uni_titles.values():
         if not_watched_movies["unwatched_friends"]==len(friends) :
             user_unique.append(not_watched_movies["movie"]) 
 
     return user_unique  
+    
+
+def get_unique_watched(user_data):
+    user_unique = None
+    if user_data is None:
+        return user_unique
+
+    friends = user_data["friends"]
+    watched = user_data["watched"]
+    
+    return  get_not_watched_by_friends(watched,friends)
 
 
 def get_friends_unique_watched(user_data) :
@@ -154,21 +164,6 @@ def get_available_recs(user_data) :
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
-def get_favorite_genre(user_data):
-    favorites = dict()
-    favorite = ""
-    fav_count = 0
-    for movie in user_data["watched"]:
-        genre = movie["genre"]
-        if genre not in favorites.keys():
-            favorites[genre] = 1
-        else: 
-            favorites[genre] += 1
-        if favorites[genre] > fav_count:
-            favorite = genre
-            fav_count = favorites[genre]
-        
-    return favorite
 
 def get_new_rec_by_genre(user_data):
     if user_data is None:
@@ -176,10 +171,16 @@ def get_new_rec_by_genre(user_data):
 
     recomendations = list()
     friends_watched = get_friends_unique_watched(user_data)
-    favorite_genre = get_favorite_genre(user_data)
+    favorite_genre = get_most_watched_genre(user_data)
 
     for movie in friends_watched:
         if movie["genre"] == favorite_genre and movie not in recomendations:
             recomendations.append(movie)
 
     return recomendations
+
+def get_rec_from_favorites(user_data):
+    if user_data is None:
+        return None
+    
+    return get_not_watched_by_friends(user_data["favorites"],user_data["friends"])
