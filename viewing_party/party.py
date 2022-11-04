@@ -128,14 +128,11 @@ def get_friends_unique_watched(user_data) :
 
     friends_unique = list()
 
-    data = dict()
     friends = user_data["friends"]
     for friend in friends:
-        data["watched"] = friend["watched"]
-        data["friends"] = friends.copy()
-        data["friends"].remove(friend)
-        data["friends"].append(user_data)
-        friends_unique.extend(get_unique_watched(data))
+        for movie in friend["watched"]:
+            if movie not in user_data["watched"] and movie not in friends_unique:
+                friends_unique.append(movie)
 
     return friends_unique
 # -----------------------------------------
