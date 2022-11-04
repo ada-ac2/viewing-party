@@ -154,4 +154,32 @@ def get_available_recs(user_data) :
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+def get_favorite_genre(user_data):
+    favorites = dict()
+    favorite = ""
+    fav_count = 0
+    for movie in user_data["watched"]:
+        genre = movie["genre"]
+        if genre not in favorites.keys():
+            favorites[genre] = 1
+        else: 
+            favorites[genre] += 1
+        if favorites[genre] > fav_count:
+            favorite = genre
+            fav_count = favorites[genre]
+        
+    return favorite
 
+def get_new_rec_by_genre(user_data):
+    if user_data is None:
+        return None
+
+    recomendations = list()
+    friends_watched = get_friends_unique_watched(user_data)
+    favorite_genre = get_favorite_genre(user_data)
+
+    for movie in friends_watched:
+        if movie["genre"] == favorite_genre and movie not in recomendations:
+            recomendations.append(movie)
+
+    return recomendations
