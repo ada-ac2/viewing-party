@@ -41,7 +41,7 @@ def movie_title_in_list(movies,title):
     return None
 
 
-#Removes movie from watchlist to watched for the given user
+#Moves movie from watchlist to watched for the given user
 def watch_movie(user_data,title):
     if user_data is None or title is None:
         return user_data
@@ -122,14 +122,10 @@ def get_not_watched_by_friends(watched, friends):
     
 
 def get_unique_watched(user_data):
-    user_unique = None
     if user_data is None:
-        return user_unique
-
-    friends = user_data["friends"]
-    watched = user_data["watched"]
+        return None
     
-    return  get_not_watched_by_friends(watched,friends)
+    return  get_not_watched_by_friends(user_data["watched"],user_data["friends"])
 
 
 def get_friends_unique_watched(user_data) :
