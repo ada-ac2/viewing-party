@@ -101,7 +101,19 @@ def get_not_watched_by_friends(watched, friends):
     if friends==[]:
         return watched
 
-    uni_titles = dict()
+    #created friends joined watched list
+    friends_watched = list()
+    for friend in friends:
+        for movie in friend["watched"]:
+            if movie not in friends_watched:
+                friends_watched.append(movie)
+
+    user_unique = list()
+    for movie in watched:
+        if movie not in friends_watched:
+            user_unique.append(movie)
+
+    '''uni_titles = dict()
     for movie in watched:
         for friend in friends:
             if movie not in friend["watched"]:
@@ -116,9 +128,9 @@ def get_not_watched_by_friends(watched, friends):
     user_unique = list()
     for not_watched_movies in uni_titles.values():
         if not_watched_movies["unwatched_friends"]==len(friends) :
-            user_unique.append(not_watched_movies["movie"]) 
+            user_unique.append(not_watched_movies["movie"]) '''
 
-    return user_unique  
+    return user_unique
     
 
 def get_unique_watched(user_data):
