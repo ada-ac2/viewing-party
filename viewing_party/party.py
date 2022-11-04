@@ -119,8 +119,25 @@ def get_unique_watched(user_data):
         if not_watched_movies["unwatched_friends"]==len(friends) :
             user_unique.append(not_watched_movies["movie"]) 
 
-    return user_unique              
+    return user_unique  
 
+
+def get_friends_unique_watched(user_data) :
+    if user_data is None:
+        return None
+
+    friends_unique = list()
+
+    data = dict()
+    friends = user_data["friends"]
+    for friend in friends:
+        data["watched"] = friend["watched"]
+        data["friends"] = friends.copy()
+        data["friends"].remove(friend)
+        data["friends"].append(user_data)
+        friends_unique.extend(get_unique_watched(data))
+
+    return friends_unique
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
