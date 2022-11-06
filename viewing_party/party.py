@@ -81,10 +81,13 @@ def friends_watched(user_data):
             friend_set.add(movie["title"])
     return friend_set
 
+def get_difference(x, y):
+    return x.difference(y)
+
 def get_unique_watched(user_data):
     user_set = user_watched(user_data)
     friend_set = friends_watched(user_data)
-    unique_title = user_set.difference(friend_set)
+    unique_title = get_difference(user_set, friend_set)
     unique_watched = list()
 
     for title in unique_title:
@@ -99,7 +102,7 @@ def get_friends_unique_watched(user_data):
     user_set = user_watched(user_data)
     friends_set = friends_watched(user_data)
 
-    unique_title = friends_set.difference(user_set)
+    unique_title = get_difference(friends_set, user_set)
     user_has_not_watched = list()
         
     for title in unique_title:
@@ -108,12 +111,19 @@ def get_friends_unique_watched(user_data):
                 if title == watched["title"] and watched not in user_has_not_watched:
                     user_has_not_watched.append(watched)
     return user_has_not_watched
-            
-
-        
+                   
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
+
+def get_available_recs(user_data):
+    user_has_not_watched = get_friends_unique_watched(user_data)
+    recommended_movies = list()
+
+    for movie in user_has_not_watched:
+        if movie["host"] in user_data["subscriptions"]:
+            recommended_movies.append(movie)
+    return recommended_movies
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
