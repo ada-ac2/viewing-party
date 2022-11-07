@@ -30,16 +30,36 @@ def watch_movie(user_data, title):
             return user_data
     return user_data
 
-# movie not in watchlist
-# move in watchlist move to watched
-# check watchlist[title] for matches with title
-# list user_data[tc]
-# what if it already exists in watched_movie
+# what if it already exists in watched_movie: ASK
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
 
+
+def get_watched_avg_rating(user_data):
+    watched_len = len(user_data["watched"])
+    if watched_len == 0:
+        return 0.0
+
+    rating_sum = 0
+    for movie in user_data["watched"]:
+        rating_sum += movie["rating"]
+
+    avg_rating = rating_sum / watched_len
+    return avg_rating
+
+
+def get_most_watched_genre(user_data):
+    if len(user_data["watched"]) == 0:
+        return None
+
+    watched_genres = {}
+    for movie in user_data["watched"]:
+        watched_genres[movie["genre"]] = watched_genres.get(movie["genre"], 0) + 1
+
+    popular_genre = max(watched_genres, key=watched_genres.get)
+    return popular_genre
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
