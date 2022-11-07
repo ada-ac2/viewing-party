@@ -2,6 +2,7 @@ import pytest
 from viewing_party.party import *
 from tests.test_constants import *
 
+
 def test_my_unique_movies():
     # Arrange
     amandas_data = clean_wave_3_data()
@@ -15,6 +16,7 @@ def test_my_unique_movies():
     assert INTRIGUE_2 in amandas_unique_movies
     assert amandas_data == clean_wave_3_data()
 
+
 def test_my_not_unique_movies():
     # Arrange
     amandas_data = clean_wave_3_data()
@@ -25,6 +27,7 @@ def test_my_not_unique_movies():
 
     # Assert
     assert len(amandas_unique_movies) == 0
+
 
 def test_friends_unique_movies():
     # Arrange
@@ -40,7 +43,7 @@ def test_friends_unique_movies():
     assert FANTASY_4 in friends_unique_movies
     assert amandas_data == clean_wave_3_data()
 
-    
+
 def test_friends_unique_movies_not_duplicated():
     # Arrange
     amandas_data = clean_wave_3_data()
@@ -51,13 +54,11 @@ def test_friends_unique_movies_not_duplicated():
 
     # Assert
     assert len(friends_unique_movies) == 3
+    test = {'genre': 'Fantasy', 'rating': 4.0,
+            'title': 'The Programmer: An Unexpected Stack Trace'}
+    assert test in friends_unique_movies
 
-    raise Exception("Test needs to be completed.")
-    # *************************************************************************************************
-    # ****** Add assertions here to test that the correct movies are in friends_unique_movies **********
-    # **************************************************************************************************
 
-    
 def test_friends_not_unique_movies():
     # Arrange
     amandas_data = {

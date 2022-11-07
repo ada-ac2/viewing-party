@@ -1,6 +1,7 @@
 from collections import Counter
 import copy
 
+
 # ------------- WAVE 1 --------------------
 def create_movie(title, genre, rating):
     if not title or not genre or not rating:
@@ -34,9 +35,7 @@ def watch_movie(user_data, title):
     return user_data
 
 
-# -----------------------------------------
 # ------------- WAVE 2 --------------------
-# -----------------------------------------
 def get_watched_avg_rating(user_data):
     if not user_data["watched"]:
         return 0.0
@@ -62,9 +61,8 @@ def get_most_watched_genre(user_data):
     most_view_genre = max(genre_counter, key=genre_counter.get)
     return most_view_genre
 
-# -----------------------------------------
+
 # ------------- WAVE 3 --------------------
-# -----------------------------------------
 def get_unique_watched(user_data):
     result = []
     friends_watched_movies = set()
@@ -94,9 +92,7 @@ def get_friends_unique_watched(user_data):
     return copy.deepcopy(friends_watched_movies)
 
 
-# -----------------------------------------
 # ------------- WAVE 4 --------------------
-# -----------------------------------------
 def get_available_recs(user_data):
     result = []
     friends_watched_movies = get_friends_unique_watched(user_data)
@@ -107,9 +103,7 @@ def get_available_recs(user_data):
     return copy.deepcopy(result)
 
 
-# -----------------------------------------
 # ------------- WAVE 5 --------------------
-# -----------------------------------------
 def get_new_rec_by_genre(user_data):
     result = []
     most_frequent_genre = get_most_watched_genre(user_data)
