@@ -17,7 +17,7 @@ RATING_2 = 4.3
 
 #----------WAVE02-------------
 HORROR_1 = {
-    "title": s1,
+    "title": MOVIE_TITLE_1,
     "genre": GENRE_1,
     "rating": RATING_1
 }
