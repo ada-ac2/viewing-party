@@ -2,8 +2,6 @@ from collections import Counter
 import copy
 
 # ------------- WAVE 1 --------------------
-
-
 def create_movie(title, genre, rating):
     if not title or not genre or not rating:
         return None
@@ -67,8 +65,6 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
-
-
 def get_unique_watched(user_data):
     result = []
     friends_watched_movies = set()
