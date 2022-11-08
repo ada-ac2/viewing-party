@@ -1,7 +1,6 @@
 # Viewing Party
 
 Date: 2022/11/08
-Wenling Yu
 
 ## Skills Assessed
 
