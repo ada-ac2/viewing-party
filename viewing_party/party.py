@@ -14,22 +14,19 @@ def create_movie(title, genre, rating):
 
 
 def add_to_watched(user_data, movie):
-    user_data["watched"] = watched_movie_lst
-    watched_movie_lst.append(movie)
+    user_data["watched"].append(movie)
     return user_data
 
 
 def add_to_watchlist(user_data, movie):
-    user_data["watchlist"] = watch_lst
-    watch_lst.append(movie)
+    user_data["watchlist"].append(movie)
     return user_data 
 
 def watch_movie(user_data, title):
-    for i in range(len(user_data["watchlist"])):
-        if user_data["watchlist"][i]["title"] == title:
-            movie_change = user_data["watchlist"][i]
-            user_data["watchlist"].pop(i)
-            user_data["watched"].append(movie_change)
+    for movie in user_data["watchlist"]:
+        if movie["title"] == title:
+            user_data["watchlist"].remove(movie)
+            user_data["watched"].append(movie)
     return user_data  
 
 
@@ -41,8 +38,8 @@ def get_watched_avg_rating(user_data):
     if len(user_data["watched"]) == 0:
         return 0.0
     
-    for i in range(len(user_data["watched"])):
-        sum_movie_rating += user_data["watched"][i]["rating"]
+    for movie in user_data["watched"]:
+        sum_movie_rating += movie["rating"]
         count += 1
     average_rating = sum_movie_rating / count
     return average_rating
@@ -68,12 +65,12 @@ def get_unique_watched(user_data):
     user_data_watched_lst = user_data["watched"]
     friend_lst = user_data["friends"]
     unique_movie_lst = []
-    all_watched = []
+    friend_all_watched = []
     for i in range(len(friend_lst)):
-        all_watched.extend(friend_lst[i]["watched"])
+        friend_all_watched.extend(friend_lst[i]["watched"])
 
     for j in range(len(user_data_watched_lst)):
-        if user_data_watched_lst[j] not in all_watched:
+        if user_data_watched_lst[j] not in friend_all_watched:
             delete_movie = user_data_watched_lst[j]
             unique_movie_lst.append(delete_movie)
     return unique_movie_lst
@@ -84,13 +81,10 @@ def get_friends_unique_watched(user_data):
     friend_lst = user_data["friends"]
     all_watched = []
     friend_unique_list = []
-    for i in range(len(friend_lst)):
-        all_watched.extend(friend_lst[i]["watched"])
-    print(all_watched)
-    print(len(all_watched))
-    for i in range(len(all_watched)):
-        if all_watched[i] not in friend_unique_list:
-            friend_unique_list.append(all_watched[i])
+    for friend in friend_lst:
+        for movie in friend["watched"]:
+            if movie not in friend_unique_list:
+                friend_unique_list.append(movie)
 
     for j in range(len(user_data_watched_lst)):
         if user_data_watched_lst[j] in friend_unique_list:
