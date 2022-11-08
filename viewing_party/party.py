@@ -91,6 +91,7 @@ def get_friends_unique_watched(user_data):
     for i in range(len(all_watched)):
         if all_watched[i] not in friend_unique_list:
             friend_unique_list.append(all_watched[i])
+
     for j in range(len(user_data_watched_lst)):
         if user_data_watched_lst[j] in friend_unique_list:
             friend_unique_list.remove(user_data_watched_lst[j])
@@ -105,14 +106,30 @@ def get_available_recs(user_data):
             recommended_lst.append(friend_unique_lst[i])
     return recommended_lst
 
-
-    
-
-
-
-# -----------------------------------------
-
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
+def get_new_rec_by_genre(user_data):
+    recommended_by_genre = []
+    most_genre = get_most_watched_genre(user_data)
+    recommended_lst = get_friends_unique_watched(user_data)
+   
+    for i in range(len(recommended_lst)):
+        if recommended_lst[i]["genre"] == most_genre:
+            recommended_by_genre.append(recommended_lst[i])
+    return recommended_by_genre
+
+
+def get_rec_from_favorites(user_data):
+    user_unique = get_unique_watched(user_data)
+    favorites_lst = []
+    for i in user_data["favorites"]:
+        if i in user_unique:
+            favorites_lst.append(i)
+    return favorites_lst
+
+
+
+
+
 # -----------------------------------------
 
