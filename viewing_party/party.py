@@ -68,18 +68,43 @@ def get_unique_watched(user_data):
     user_data_watched_lst = user_data["watched"]
     friend_lst = user_data["friends"]
     unique_movie_lst = []
-    print(friend_lst)
-    #print(len(user_data))
+    all_watched = []
+    for i in range(len(friend_lst)):
+        all_watched.extend(friend_lst[i]["watched"])
 
-    for i in range(len(user_data_watched_lst)):
-        for j in range(len(friend_lst)):
-            if tests/test_wave_03.py::test_my_unique_movies not in friend_lst[j]["watched"]:
-                prin)
-                unique_movie = user_data_watched_lst[i]
-                unique_movie_lst.append(user_data_watched_lst[i])
+    for j in range(len(user_data_watched_lst)):
+        if user_data_watched_lst[j] not in all_watched:
+            delete_movie = user_data_watched_lst[j]
+            unique_movie_lst.append(delete_movie)
     return unique_movie_lst
-            
-        
+
+
+def get_friends_unique_watched(user_data):
+    user_data_watched_lst = user_data["watched"]
+    friend_lst = user_data["friends"]
+    print(user_data_watched_lst)
+    print(len(user_data_watched_lst))
+    print("!!!!")
+    #unique_movie_lst = []
+    all_watched = []
+    friend_unique_list = []
+    for i in range(len(friend_lst)):
+        all_watched.extend(friend_lst[i]["watched"])
+    print(all_watched)
+    print(len(all_watched))
+    for i in range(len(all_watched)):
+        if all_watched[i] not in friend_unique_list:
+            friend_unique_list.append(all_watched[i])
+    print(len(friend_unique_list))
+
+
+    
+    for j in range(len(user_data_watched_lst)):
+        if user_data_watched_lst[j] in friend_unique_list:
+            friend_unique_list.remove(user_data_watched_lst[j])
+    return friend_unique_list
+
+
 
 
 # -----------------------------------------
