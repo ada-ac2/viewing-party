@@ -33,6 +33,10 @@ def add_to_watched(user_data, movie):
 
 # print(add_to_watched(user_data, movie))
 
+def add_to_watchlist(user_data, movie):
+    user_data["watchlist"].append(movie)
+    return user_data
+
 
 
 # -----------------------------------------
