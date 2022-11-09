@@ -83,11 +83,16 @@ def get_most_watched_genre(user_data):
 
         max_genre = list(counter_dic.keys())[list(counter_dic.values()).index(max_num)]
         return max_genre
+        
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
-
-        
+# wave 3 fun 1
+def get_unique_watched(user_data):
+    pass
+#wave 3 fun 2
+def get_friends_unique_watched(user_data):
+    pass
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
