@@ -1,7 +1,5 @@
 # Viewing Party
 
-Date: 2022/11/08
-
 ## Skills Assessed
 
 Solving problems with...
