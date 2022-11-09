@@ -193,4 +193,14 @@ def get_new_rec_by_genre(user_data):
 
     return recommendation
 
+def get_rec_from_favorites(user_data):
+    friends_movies_list = get_collective_friends_movies(user_data)
+    recommendations = []
+
+    for movie in user_data["favorites"]:
+        if movie not in friends_movies_list:
+            recommendations.append(movie)
+
+    return recommendations
+
 
