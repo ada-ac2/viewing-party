@@ -89,6 +89,82 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
+# USER_DATA_2 = {
+#     "watched": [
+#         "FANTASY_1", 
+#         "FANTASY_2", 
+#         "FANTASY_3", 
+#         "ACTION_1", 
+#         "INTRIGUE_1", 
+#         "INTRIGUE_2"
+#         ],  
+#     "friends": [
+#         {
+#             "watched": [
+#                 "FANTASY_1",
+#                 "FANTASY_3",
+#                 "FANTASY_4",
+#                 "HORROR_1",
+#             ]
+#         },
+#         {
+#             "watched": [
+#                 "FANTASY_1",
+#                 "ACTION_1",
+#                 "INTRIGUE_1",
+#                 "INTRIGUE_3",
+#             ]
+#         }
+#     ]  
+# }
+
+# def get_unique_watched(user_data):
+#     user_movies_set = set(user_data["watched"])
+#     friends_movies_set = set()
+
+#     for friend in user_data["friends"]:
+#         # print(f"friend['watched'] converted to a set is{set(friend['watched'])}")
+#         # print(f"friends_movies_set is {friends_movies_set}")
+#         friends_movies_set.update(set(friend["watched"]))
+
+#     unique_movies = user_movies_set.difference(friends_movies_set)
+#     return unique_movies
+
+# print(get_unique_watched(USER_DATA_2))
+
+def get_collective_friends_movies(user_data):
+    friends_movies_list = []
+
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            if movie not in friends_movies_list:
+                friends_movies_list.append(movie)
+
+    return friends_movies_list
+
+
+def get_unique_watched(user_data):
+    unique_movies = []
+
+    friends_movies_list = get_collective_friends_movies(user_data)
+
+    for movie in user_data["watched"]:
+        if movie not in friends_movies_list:
+            unique_movies.append(movie)
+
+    return unique_movies
+
+def get_friends_unique_watched(user_data):
+    unique_movies = []
+
+    friends_movies_list = get_collective_friends_movies(user_data)
+
+    for movie in friends_movies_list:
+        if movie not in user_data["watched"]:
+            unique_movies.append(movie)
+
+    return unique_movies
+
 
         
 # -----------------------------------------
