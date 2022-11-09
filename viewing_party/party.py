@@ -14,17 +14,15 @@ def create_movie(title, genre, rating):
 
 # wave 1 fun 2
 def add_to_watched(user_data, movie):
-    # if len(user_data["watched"])==0:
     user_data["watched"].append(movie)
     return user_data
 
 # wave 1 fun 3
 def add_to_watchlist(user_data, movie):
-    # if len(user_data["watchlist"])==0:
     user_data["watchlist"].append(movie)
     return user_data
 
-# wave 1 fun 4 (questions)
+# wave 1 fun 4 
 def watch_movie(user_data, movie_title):
     print(f"user_data: {user_data} \n movie_title: {movie_title}")
     # if title not in the watchlist => return data
@@ -83,7 +81,7 @@ def get_most_watched_genre(user_data):
 
         max_genre = list(counter_dic.keys())[list(counter_dic.values()).index(max_num)]
         return max_genre
-        
+
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
