@@ -12,26 +12,11 @@ def create_movie(movie_title, genre, rating):
 
     return movies
 
-# movie_title = "MOVIE_TITLE_1"
-# genre = "GENRE_1"
-# rating = "RATING_1"
-
-# print(create_movie(movie_title, genre, rating))
 
 def add_to_watched(user_data, movie):
     user_data["watched"].append(movie)
     return user_data
 
-# movie = {
-#     "title": "MOVIE_TITLE_1",
-#     "genre": "GENRE_1",
-#     "rating": "RATING_1"
-# }
-# user_data = {
-#     "watched": []
-# }
-
-# print(add_to_watched(user_data, movie))
 
 def add_to_watchlist(user_data, movie):
     user_data["watchlist"].append(movie)
@@ -85,53 +70,9 @@ def get_most_watched_genre(user_data):
             return genre
 
 
-
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
-# USER_DATA_2 = {
-#     "watched": [
-#         "FANTASY_1", 
-#         "FANTASY_2", 
-#         "FANTASY_3", 
-#         "ACTION_1", 
-#         "INTRIGUE_1", 
-#         "INTRIGUE_2"
-#         ],  
-#     "friends": [
-#         {
-#             "watched": [
-#                 "FANTASY_1",
-#                 "FANTASY_3",
-#                 "FANTASY_4",
-#                 "HORROR_1",
-#             ]
-#         },
-#         {
-#             "watched": [
-#                 "FANTASY_1",
-#                 "ACTION_1",
-#                 "INTRIGUE_1",
-#                 "INTRIGUE_3",
-#             ]
-#         }
-#     ]  
-# }
-
-# def get_unique_watched(user_data):
-#     user_movies_set = set(user_data["watched"])
-#     friends_movies_set = set()
-
-#     for friend in user_data["friends"]:
-#         # print(f"friend['watched'] converted to a set is{set(friend['watched'])}")
-#         # print(f"friends_movies_set is {friends_movies_set}")
-#         friends_movies_set.update(set(friend["watched"]))
-
-#     unique_movies = user_movies_set.difference(friends_movies_set)
-#     return unique_movies
-
-# print(get_unique_watched(USER_DATA_2))
-
 def get_collective_friends_movies(user_data):
     friends_movies_list = []
 
@@ -153,6 +94,7 @@ def get_unique_watched(user_data):
 
     return unique_movies
 
+
 def get_friends_unique_watched(user_data):
     unique_movies = []
     friends_movies_list = get_collective_friends_movies(user_data)
@@ -163,8 +105,6 @@ def get_friends_unique_watched(user_data):
 
     return unique_movies
 
-
-        
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
@@ -177,7 +117,6 @@ def get_available_recs(user_data):
             available_recommendations.append(movie)
 
     return available_recommendations
-
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
@@ -192,6 +131,7 @@ def get_new_rec_by_genre(user_data):
             recommendation.append(movie)
 
     return recommendation
+
 
 def get_rec_from_favorites(user_data):
     friends_movies_list = get_collective_friends_movies(user_data)
