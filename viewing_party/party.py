@@ -87,10 +87,56 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 # wave 3 fun 1
 def get_unique_watched(user_data):
-    pass
+    # return a list of dictionaries that contain movies 
+    # which friends' didn't watched
+    # print(f"user: {user_data['watched']}")
+    user_watched_set = set()
+    for movie in user_data["watched"]:
+        user_watched_set.add(movie["title"])
+    # print(f"user_watched_set: {user_watched_set}")
+    friends_watched_set = set()
+    for friend_watched in user_data["friends"]:
+        for movie_name in friend_watched["watched"]:
+            friends_watched_set.add(movie_name["title"])
+    # print(f"friends_watched_set: {friends_watched_set}")
+    non_watch_set = user_watched_set.difference(friends_watched_set)
+    # print(f"none_watch_set: {none_watch_set}")
+    non_watched_list = []
+    for name in list(non_watch_set):
+        for movie in user_data["watched"]:
+            if name == movie["title"]:
+                non_watched_list.append(movie)
+    # print(f"non_watched_list: {non_watched_list}")
+    return non_watched_list 
 #wave 3 fun 2
 def get_friends_unique_watched(user_data):
-    pass
+    # print(f"user_data[watch]: {user_data['watched']}")
+    # print("******************************************")
+    # print(f"user_data[firends]: {user_data['friends']}")
+    # print("******************************************")
+    #user watched set
+    user_watched_set = set()
+    for movie in user_data["watched"]:
+        user_watched_set.add(movie["title"])
+    # friends watch set
+    friends_watched_set = set()
+    for friend_watched in user_data["friends"]:
+        for movie_name in friend_watched["watched"]:
+            friends_watched_set.add(movie_name["title"])
+    #friends watched but user's didn't
+    user_nonwatched_set = friends_watched_set.difference(user_watched_set)
+    # print(f"user_nonwatched_set: {user_nonwatched_set}")
+    # print("******************************************")
+    # create the result list to store
+    # use title value to find the movie dictionaries and store them to the result list
+    result_list =[]
+    for name in list(user_nonwatched_set):
+        for friends_movie in user_data["friends"]:
+            for movie in friends_movie["watched"]:
+                if name == movie["title"] and result_list.count(movie)==0 :
+                    result_list.append(movie)
+    # print(f"result_list: {result_list}")
+    return result_list
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
