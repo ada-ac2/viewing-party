@@ -12,9 +12,9 @@ def create_movie(movie_title, genre, rating):
 
     return movies
 
-movie_title = "MOVIE_TITLE_1"
-genre = "GENRE_1"
-rating = "RATING_1"
+# movie_title = "MOVIE_TITLE_1"
+# genre = "GENRE_1"
+# rating = "RATING_1"
 
 # print(create_movie(movie_title, genre, rating))
 
@@ -49,21 +49,6 @@ def watch_movie(user_data, movie_title):
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
-# INTRIGUE_3 = {
-#     "title": "Zero Dark Python",
-#     "genre": "Intrigue",
-#     "rating": 3.0
-# }
-# USER_DATA_2 = {
-#     "watched": [
-#         FANTASY_1, 
-#         FANTASY_2, 
-#         FANTASY_3, 
-#         ACTION_1, 
-#         INTRIGUE_1, 
-#         INTRIGUE_2
-#         ],    
-# }
 
 def  get_watched_avg_rating(user_data):
     if len(user_data["watched"]) == 0:
@@ -79,6 +64,25 @@ def  get_watched_avg_rating(user_data):
     average_rating = ratings_sum/movies_num
 
     return average_rating
+
+
+def get_most_watched_genre(user_data):
+    if len(user_data["watched"]) == 0:
+        return None
+    
+    genre_frequency = {}
+
+    for movie in user_data["watched"]:
+        if movie["genre"] in genre_frequency:
+            genre_frequency[movie["genre"]] += 1
+        else:
+            genre_frequency[movie["genre"]] = 1
+
+    max_num_for_genre = max(genre_frequency.values())
+
+    for genre, frequency in genre_frequency.items():
+        if frequency == max_num_for_genre:
+            return genre
 
 
 
