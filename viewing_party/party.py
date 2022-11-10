@@ -173,4 +173,29 @@ def get_new_rec_by_genre(user_data):
     return recommended_movies_list 
 
 def get_rec_from_favorites(user_data):
-    pass
+    # return a recommended movies list 
+    # conditions:
+    # user favorites but friends haven't watched
+    # print(f"user_data: {user_data}")
+    user_favorites_set = set()
+    for user_favorites in user_data["favorites"]:
+        user_favorites_set.add(user_favorites["title"])
+    # print(f"user_favorites_set: {user_favorites_set}")
+
+    friends_watched_set = set()
+    for friend_watched in user_data["friends"]:
+        for movie_name in friend_watched["watched"]:
+            friends_watched_set.add(movie_name["title"])
+    # print(f"friends_watched_set: {friends_watched_set}")       
+    
+    friends_nonwatch_set = user_favorites_set.difference(friends_watched_set)
+    # print(f"friends_nonwatch_set: {friends_nonwatch_set}")  
+    recommended_list = []
+    for name in list(friends_nonwatch_set):
+        for movie in user_data["favorites"]:
+            if name == movie["title"]:
+                recommended_list.append(movie)
+        
+    # print(f"recommended_list: {recommended_list}")  
+
+    return recommended_list
