@@ -54,14 +54,17 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
+def get_friends_watched(user_data):
+    friends_watched = []
+    for friends in user_data["friends"]:
+        for watched in friends["watched"]:
+            friends_watched.append(watched)
+    return friends_watched
 
 def get_unique_watched(user_data):
     friends_watched = []
     unique_watched = []
-    for friends in user_data["friends"]:
-        for watched in friends["watched"]:
-            friends_watched.append(watched)
-    
+    friends_watched = get_friends_watched(user_data)
     for movie in user_data["watched"]:
         if movie not in friends_watched:
             unique_watched.append(movie)
@@ -71,9 +74,7 @@ def get_unique_watched(user_data):
 def get_friends_unique_watched(user_data):
     friends_watched = []
     friends_unique_watched = []
-    for friends in user_data["friends"]:
-        for watched in friends["watched"]:
-            friends_watched.append(watched)
+    friends_watched = get_friends_watched(user_data)
     
     for movie in friends_watched:
         if movie not in user_data["watched"] and movie not in friends_unique_watched:
@@ -84,7 +85,16 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
-
+def get_available_recs(user_data):
+    can_watch_movies = []
+    friends_watched = []
+    friends_watched = get_friends_watched(user_data)
+        
+    for movie in friends_watched:
+        if movie not in user_data["watched"] and movie not in can_watch_movies:
+            if movie["host"] in user_data["subscriptions"]:
+                can_watch_movies.append(movie)
+    return can_watch_movies
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
