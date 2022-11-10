@@ -1,0 +1,1 @@
+def test_moves_movie_from_watchlist_to_watched():
