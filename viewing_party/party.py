@@ -36,7 +36,38 @@ def watch_movie(user_data, title):
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
+def get_watched_avg_rating(user_data):
+    #user_data = {"watched": []}
+    total_rating == 0
+    count = 0
+    for watched_movie in user_data["watched"]:
+        count += 1
+        total_rating += watched_movie["rating"]
+    avg_rating = round(total_rating / count,1)
+    return avg_rating if count >0 else 0.0
 
+def get_most_watched_genre(user_data):
+    from collections import defaultdict
+    dic = defaultdict(int)
+    for watched_movie in user_data["watched"]:
+        genre = watched_movie["genre"]
+        dic[genre]+=1
+    max_num = 0
+    most_watched_genre = ""
+    for key, value in dic.items():
+        if value > max_num:
+            max_num = value
+            most_watched_genre = key
+    return most_watched_genre if user_data["watched"] else None
+
+
+    
+        
+
+    
+    
+
+    
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
