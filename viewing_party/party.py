@@ -12,7 +12,7 @@ def create_movie(title, genre, rating):
     return movie
 
 def add_to_watched(user_data, movie):
-    if user_data is None or movie is None:
+    if not user_data or not movie:
         return user_data
 
     user_data["watched"].append(movie)
@@ -20,10 +20,7 @@ def add_to_watched(user_data, movie):
     return user_data
 
 def add_to_watchlist(user_data, movie) :
-    if user_data is None or movie is None:
-        return user_data
-
-    if movie is None:
+    if not user_data or not movie:
         return user_data
 
     user_data["watchlist"].append(movie)
@@ -31,7 +28,7 @@ def add_to_watchlist(user_data, movie) :
     return user_data
 
 def movie_title_in_list(movies,title):
-    if movies is None or title is None:
+    if not movies or not title:
         return None
 
     for movie in movies:
@@ -43,7 +40,7 @@ def movie_title_in_list(movies,title):
 
 #Moves movie from watchlist to watched for the given user
 def watch_movie(user_data,title):
-    if user_data is None or title is None:
+    if not user_data or not title:
         return user_data
 
     movie = movie_title_in_list(user_data["watchlist"],title)
@@ -58,7 +55,7 @@ def watch_movie(user_data,title):
 # -----------------------------------------
 def get_watched_avg_rating(user_data) :
     avg = 0
-    if user_data is None:
+    if not user_data:
         return avg
 
     watched = len (user_data["watched"])
@@ -73,7 +70,7 @@ def get_watched_avg_rating(user_data) :
 def get_most_watched_genre(user_data):
     fav_genre = None
     max_watched = 0
-    if user_data is None:
+    if not user_data:
         return fav_genre
 
     genres = dict()
@@ -113,35 +110,18 @@ def get_not_watched_by_friends(watched, friends):
         if movie not in friends_watched:
             user_unique.append(movie)
 
-    '''uni_titles = dict()
-    for movie in watched:
-        for friend in friends:
-            if movie not in friend["watched"]:
-                title = movie["title"]
-                if title not in uni_titles.keys():
-                    uni_titles[title] = dict()
-                    uni_titles[title]["movie"] = movie
-                    uni_titles[title]["unwatched_friends"] = 1
-                else:
-                    uni_titles[title]["unwatched_friends"]+=1
-
-    user_unique = list()
-    for not_watched_movies in uni_titles.values():
-        if not_watched_movies["unwatched_friends"]==len(friends) :
-            user_unique.append(not_watched_movies["movie"]) '''
-
     return user_unique
     
 
 def get_unique_watched(user_data):
-    if user_data is None:
+    if not user_data:
         return None
     
     return  get_not_watched_by_friends(user_data["watched"],user_data["friends"])
 
 
 def get_friends_unique_watched(user_data) :
-    if user_data is None:
+    if not user_data:
         return None
 
     friends_unique = list()
@@ -158,7 +138,7 @@ def get_friends_unique_watched(user_data) :
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 def get_available_recs(user_data) :
-    if user_data is None :
+    if not user_data:
         return None
 
     recomendations = list()
@@ -174,7 +154,7 @@ def get_available_recs(user_data) :
 # -----------------------------------------
 
 def get_new_rec_by_genre(user_data):
-    if user_data is None:
+    if not user_data:
         return None
 
     recomendations = list()
@@ -188,7 +168,7 @@ def get_new_rec_by_genre(user_data):
     return recomendations
 
 def get_rec_from_favorites(user_data):
-    if user_data is None:
+    if not user_data:
         return None
     
     return get_not_watched_by_friends(user_data["favorites"],user_data["friends"])
