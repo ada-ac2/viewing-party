@@ -62,7 +62,7 @@ def test_friends_unique_movies_not_duplicated():
     friends_watched = []
     for friends in amandas_data["friends"]:
         for watched in friends["watched"]:
-            friends_watched.append(watched)\
+            friends_watched.append(watched)
     
     for movie in friends_watched:
         if movie not in amandas_data["watched"]:
