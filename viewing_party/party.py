@@ -57,7 +57,7 @@ def get_unique_watched(user_data):
 
     unique_movies = []
     for movie in user_data["watched"]:
-        if movie["title"] in unique_title:
+        if movie["title"] in unique_title and movie not in unique_movies:
             unique_movies.append(movie)
 
     return unique_movies
@@ -80,6 +80,7 @@ def get_friends_unique_watched(user_data):
             if friend_movie["title"] in friend_unique_titles:
                 if friend_movie not in friend_unique_movies:
                     friend_unique_movies.append(friend_movie)
+
     return friend_unique_movies
 
 # -----------------------------------------
