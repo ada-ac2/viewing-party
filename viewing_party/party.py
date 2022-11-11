@@ -11,20 +11,17 @@ def create_movie(title, genre, rating):
         None
 
 def add_to_watched(user_data, movie):
-    #user_data = {"watched": []}
+    
     user_data["watched"].append(movie)
     return user_data
 
 def add_to_watchlist(user_data, movie):
-    #user_data = {"watchlist":[] }
+   
     user_data["watchlist"].append(movie)
     return user_data
 
 def watch_movie(user_data, title):
-    # user_data = {
-    #                 "watchlist": [],
-    #                 "watched": []
-    #             }
+    
     for m_to_watch in user_data["watchlist"]:
         title_to_watch = m_to_watch["title"]
         if title_to_watch == title:
@@ -37,7 +34,7 @@ def watch_movie(user_data, title):
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
 def get_watched_avg_rating(user_data):
-    #user_data = {"watched": []}
+    
     total_rating == 0
     count = 0
     for watched_movie in user_data["watched"]:
@@ -72,8 +69,35 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
+def get_unique_watched(user_data):
+    
+    watched_movies_list = user_data["watched"]
 
-        
+    fds_watched_movies_list= []
+    for friend_data in user_data["friends"]:
+        for fd_watched_movies in friend_data["watched"]:
+            fds_watched_movies_list.append(fd_watched_movies)
+
+    user_unique_watched_movies_list = []
+    for x in watched_movies_list:
+        if x not in fds_watched_movies_list and x not in user_unique_watched_movies_list:
+            user_unique_watched_movies_list.append(x)
+    return user_unique_watched_movies_list
+
+def get_friends_unique_watched(user_data):
+    
+    watched_movies_list = user_data["watched"]
+
+    fds_watched_movies_list= []
+    for friend_data in user_data["friends"]:
+        for fd_watched_movies in friend_data["watched"]:
+            fds_watched_movies_list.append(fd_watched_movies)
+
+    friends_unique_watched_movies_list = []
+    for x in fds_watched_movies_list:
+        if x not in watched_movies_list and x not in friends_unique_watched_movies_list:
+            friends_unique_watched_movies_list.append(x)
+    return friends_unique_watched_movies_list
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
