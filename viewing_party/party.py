@@ -68,38 +68,37 @@ def get_most_watched_genre(user_data):
 
 def get_unique_watched(user_data):
     watched_movies_list = user_data["watched"]
-    friends_watched_movies_list = []
-
-    for friends_watched_movies in user_data["friends"]:
-        friends_watched_movies_list.append(friends_watched_movies["watched"])
-
-    friends_watched_movies_list = sum(friends_watched_movies_list, [])
+    friends_watched_movies_list = get_friends_watched_movies(user_data)
     return [movie for movie in watched_movies_list if movie not in friends_watched_movies_list]
 
 
 def get_friends_unique_watched(user_data):
     watched_movies_list = user_data["watched"]
+    friends_watched_movies_list = get_friends_watched_movies(user_data)
+    remove_movie_duplicates(friends_watched_movies_list)
+
+    friends_unique_list = [movie for movie in friends_watched_movies_list if movie not in watched_movies_list]
+    return friends_unique_list
+
+
+def get_friends_watched_movies(user_data):
     friends_watched_movies_list = []
 
     for friends_watched_movies in user_data["friends"]:
         friends_watched_movies_list.append(friends_watched_movies["watched"])
 
     friends_watched_movies_list = sum(friends_watched_movies_list, [])
+    return friends_watched_movies_list
 
-    # remove duplicate titles
+
+def remove_movie_duplicates(friends_watched_movies_list):
     friends_watched_movie_titles = {}
-    
     for movie in friends_watched_movies_list:
         friends_watched_movie_titles[movie["title"]] = friends_watched_movie_titles.get(movie["title"], 0) + 1
-        
         if friends_watched_movie_titles[movie["title"]] > 1:
             friends_watched_movies_list.remove(movie)
             friends_watched_movie_titles[movie["title"]] = friends_watched_movie_titles[movie["title"]] - 1
-
-    friends_unique_list = [movie for movie in friends_watched_movies_list if movie not in watched_movies_list]
-    return friends_unique_list
-    
-
+    return friends_watched_movies_list
 
 
 # -----------------------------------------
