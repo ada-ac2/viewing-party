@@ -105,7 +105,23 @@ def remove_movie_duplicates(friends_watched_movies_list):
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 
+
+def get_available_recs(user_data):
+    friends_available_recs = get_friends_unique_watched(user_data)
+    available_recs = []
+    for movie in friends_available_recs:
+        if movie["host"] in user_data["subscriptions"]:
+            available_recs.append(movie)
+    return available_recs
+
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
+
+def get_new_rec_by_genre(user_data):
+    pass
+
+
+def get_rec_from_favorites(user_data):
+    pass
