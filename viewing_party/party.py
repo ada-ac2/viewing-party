@@ -60,18 +60,28 @@ def get_most_watched_genre(user_data):
 
 #### +++++++++++++++++++++++++
 # ------------- WAVE 3 --------------------
-def get_unique_watched(user_data):
+### HElper function for finding friends movie list 
+def get_friends_movie_list(user_data):
     friends_movie_list = []
-    for friends_watched_movie in user_data["friends"]:
-        for movie in friends_watched_movie["watched"]:
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
             friends_movie_list.append(movie)
-    #print(friends_movie_list)
+    return friends_movie_list
+def get_unique_watched(user_data):
+    friends_movie_list = get_friends_movie_list(user_data)    
     my_unique_watched_list = []
     for my_unique_movie in user_data["watched"]:
         if my_unique_movie not in friends_movie_list and my_unique_movie not in my_unique_watched_list:
             my_unique_watched_list.append(my_unique_movie)
-    #print(my_unique_watched_list)
     return my_unique_watched_list
+
+'''    
+    for my_unique_movie in user_data["watched"]:
+        is_movie_in_friends = my_unique_movie in friends_movie_list
+        is_movie_in_unique_list = my_unique_movie in my_unique_watched_list
+        if  not is_movie_in_friends and not is_movie_in_unique_list:
+            my_unique_watched_list.append(my_unique_movie) '''
+    
 ###+++++++++++++++++++++
 
 def get_friends_unique_watched(user_data):
@@ -80,7 +90,6 @@ def get_friends_unique_watched(user_data):
         for movie in friend["watched"]:
             if movie not in user_data["watched"] and movie not in friends_unique_movie:
                 friends_unique_movie.append(movie)
-    #print(friends_unique_movie)
     return friends_unique_movie
 
 ###### Wave 4++++++++++++++++++++++++++++
@@ -105,11 +114,7 @@ def get_new_rec_by_genre(user_data):
     return recommended_movies_by_genre
 ######++++++++++++++++++++++++++
 def get_rec_from_favorites(user_data):
-    friends_movie_list = []
-    for friend in user_data["friends"]:
-        for movie in friend["watched"]:
-            friends_movie_list.append(movie)
-
+    friends_movie_list = get_friends_movie_list(user_data)    
     recommended_movies_by_favorites = []
 
     for movie in user_data["favorites"]:

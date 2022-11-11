@@ -6,42 +6,7 @@ from tests.test_constants import *
 def test_my_unique_movies():
     # Arrange
     amandas_data = clean_wave_3_data()
-    '''
-#-----WAVE 3--------
-
-USER_DATA_2 = {
-    "watched": [
-        FANTASY_1, 
-        FANTASY_2, 
-        FANTASY_3, 
-        ACTION_1, 
-        INTRIGUE_1, 
-        INTRIGUE_2
-        ],    
-}
-USER_DATA_3 = copy.deepcopy(USER_DATA_2)
-
-USER_DATA_3["friends"] =  [
-        {
-            "watched": [
-                FANTASY_1,
-                FANTASY_3,
-                FANTASY_4,
-                HORROR_1,
-            ]
-        },
-        {
-            "watched": [
-                FANTASY_1,
-                ACTION_1,
-                INTRIGUE_1,
-                INTRIGUE_3,
-            ]
-        }
-    ]  
-
-    '''
-
+ 
     # Act
     amandas_unique_movies = get_unique_watched(amandas_data)
 
@@ -89,7 +54,9 @@ def test_friends_unique_movies_not_duplicated():
 
     # Assert
     assert len(friends_unique_movies) == 3
-
+    assert FANTASY_4 in friends_unique_movies
+    assert HORROR_1 in friends_unique_movies
+    assert INTRIGUE_3 in friends_unique_movies
     #raise Exception("Test needs to be completed.")
     # *************************************************************************************************
     # ****** Add assertions here to test that the correct movies are in friends_unique_movies **********

@@ -145,7 +145,7 @@ def test_moves_movie_from_watchlist_to_watched():
     assert len(updated_data["watchlist"]) == 1
     assert len(updated_data["watched"]) == 2
     assert updated_data["watched"][1]["title"] == "It Came from the Stack Trace"
-    
+    assert HORROR_1 in updated_data["watched"]
     #raise Exception("Test needs to be completed.")
     # *******************************************************************************************
     # ****** Add assertions here to test that the correct movie was added to "watched" **********
