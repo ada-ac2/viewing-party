@@ -114,15 +114,14 @@ def get_available_recs(user_data):
 # -----------------------------------------
 
 def get_new_rec_by_genre(user_data):
+    recommendations = []
 
-    possible_recs = get_available_recs(user_data)
+    if len(user_data["watched"]) != 0 and len(user_data["friends"]) != 0: 
+        possible_recs = get_friends_unique_watched(user_data)
 
-    user_genres = set()
-
-    for movie in user_data["watched"]:
-        user_genres.add(movie["genre"])
-    
-    recommendations  = [movie for movie in possible_recs if movie["genre"] in user_genres]
+        most_watched_genre = get_most_watched_genre(user_data)
+        
+        recommendations = [movie for movie in possible_recs if movie["genre"] == most_watched_genre]
 
     return recommendations
 
