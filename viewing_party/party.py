@@ -74,7 +74,7 @@ def get_unique_watched(user_data):
     for movies_watched in user_data["watched"]:
         if movies_watched["title"] not in friends_watched_movies:
             result.append(movies_watched)
-    return copy.deepcopy(result)
+    return result
 
 
 def get_friends_unique_watched(user_data):
@@ -89,7 +89,7 @@ def get_friends_unique_watched(user_data):
         if movies_watched in friends_watched_movies:
             friends_watched_movies.remove(movies_watched)
 
-    return copy.deepcopy(friends_watched_movies)
+    return friends_watched_movies
 
 
 # ------------- WAVE 4 --------------------
@@ -100,7 +100,7 @@ def get_available_recs(user_data):
     for data in friends_watched_movies:
         if data["host"] in user_data["subscriptions"]:
             result.append(data)
-    return copy.deepcopy(result)
+    return result
 
 
 # ------------- WAVE 5 --------------------
@@ -112,7 +112,7 @@ def get_new_rec_by_genre(user_data):
     for data in qualified_movies:
         if data["genre"] == most_frequent_genre:
             result.append(data)
-    return copy.deepcopy(result)
+    return result
 
 
 def get_rec_from_favorites(user_data):
@@ -122,4 +122,4 @@ def get_rec_from_favorites(user_data):
     for data in user_data["favorites"]:
         if data in unique_user_movies:
             result.append(data)
-    return copy.deepcopy(result)
+    return result
