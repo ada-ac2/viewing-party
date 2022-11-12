@@ -94,9 +94,9 @@ def get_friends_unique_watched(user_data):
             fds_watched_movies_list.append(fd_watched_movies)
 
     friends_unique_watched_movies_list = []
-    for x in fds_watched_movies_list:
-        if x not in watched_movies_list and x not in friends_unique_watched_movies_list:
-            friends_unique_watched_movies_list.append(x)
+    for movie in fds_watched_movies_list:
+        if movie not in watched_movies_list and movie not in friends_unique_watched_movies_list:
+            friends_unique_watched_movies_list.append(movie)
     return friends_unique_watched_movies_list
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
@@ -112,4 +112,26 @@ def get_available_recs(user_data):
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+def get_new_rec_by_genre(user_data):
+    recommended_movies_list_by_most_watched_genre = []
+    friends_unique_movies = get_friends_unique_watched(user_data)
+    user_most_watched_genre = get_most_watched_genre(user_data)
+    for fd_movie in friends_unique_movies:
+        if fd_movie["genre"] == user_most_watched_genre:
+             recommended_movies_list_by_most_watched_genre.append(fd_movie)
+        return recommended_movies_list_by_most_watched_genre
 
+def get_rec_from_favorites(user_data):
+    
+    favorite_movies_list = user_data["favorites"]
+
+    fds_watched_movies_list= []
+    for friend_data in user_data["friends"]:
+        for fd_watched_movies in friend_data["watched"]:
+            fds_watched_movies_list.append(fd_watched_movies)
+
+    user_unique_favorite_movies_list = []
+    for movie in favorite_movies_list:
+        if movie not in fds_watched_movies_list and movie not in user_unique_favorite_movies_list:
+            user_unique_favorite_movies_list.append(movie)
+    return user_unique_favorite_movies_list
