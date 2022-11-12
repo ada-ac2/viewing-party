@@ -119,7 +119,7 @@ def get_new_rec_by_genre(user_data):
     for fd_movie in friends_unique_movies:
         if fd_movie["genre"] == user_most_watched_genre:
              recommended_movies_list_by_most_watched_genre.append(fd_movie)
-        return recommended_movies_list_by_most_watched_genre
+    return recommended_movies_list_by_most_watched_genre
 
 def get_rec_from_favorites(user_data):
     
