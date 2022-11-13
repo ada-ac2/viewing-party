@@ -160,6 +160,20 @@ def get_friends_unique_watched(amandas_data):
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 
+def get_available_recs(amandas_data):
+    """
+    Collects movies from friends recommendations list (first 'watched' nested dictionary) and adds to recommended list if movie not already watched by amanda
+    :params: dict - amandas_data
+    :returns: list - list of recommended movies
+    """
+    recommendations = []
+    for movies in amandas_data['friends']:
+        for movie in movies['watched']:
+            if movie not in amandas_data['watched'] and movie['rating'] >= 3.5:
+                recommendations.append(movie)
+        
+    return recommendations
+
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
