@@ -178,3 +178,42 @@ def get_available_recs(amandas_data):
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
+def get_new_rec_by_genre(sonyas_data):
+    """
+    Collects recommendations by genre
+    :params: dict - sonyas_data
+    :returns: list - recommendations
+    """
+    recommendations = []
+    if len(sonyas_data['watched']) != 0:
+        for movies in sonyas_data['friends']:
+            for movie in movies['watched']:
+                if movie not in sonyas_data['watched'] and movie['rating'] > 3.5:
+                    recommendations.append(movie)
+    return recommendations
+
+def get_rec_from_favorites(sonyas_data):
+    """
+    Collects recommendations from Sonyas favorites
+    :params: dict - sonyas_data
+    :returns: list - recommendations
+    """
+    recommendations = []
+    # iterate through friends watched movies
+    friends_watched = []
+    for movies in sonyas_data['friends']:
+        for movie in movies['watched']:
+            # prevent duplicates
+            if movie not in friends_watched:
+                friends_watched.append(movie)
+    # iterate through sonyas favorites
+    for movie in sonyas_data['favorites']:
+        # assume sonyas favorite not in friends watched list
+        if movie not in friends_watched:
+            # add to recommendations
+            recommendations.append(movie)
+    return recommendations
+
+
+    
+
