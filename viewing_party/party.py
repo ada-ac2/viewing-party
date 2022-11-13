@@ -108,7 +108,54 @@ def get_most_watched_genre(janes_data):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
-        
+def get_unique_watched(amandas_data):
+    """
+    Compares amandas watched movies to friends watched movies to return list of amandas unique watched movies
+    :params: dict - amandas_data: dataset containing amandas and friends watched movies
+    :returns: list - amandas_unique_movies: list of movies only amanda watched
+    """
+    # iterate through amandas watched movies
+    amandas_movies = []
+    for movie in amandas_data['watched']:
+        amandas_movies.append(movie)
+    # iterate through friends watched movies
+    friends_movies = []
+    for movies in amandas_data['friends']:
+        for movie in movies['watched']:
+            friends_movies.append(movie)
+    # collect diff between amandas and friends
+    amandas_unique_movies = []
+    for movie in amandas_movies:
+        if movie not in friends_movies:
+            amandas_unique_movies.append(movie)
+    return amandas_unique_movies
+
+
+def get_friends_unique_watched(amandas_data):
+    """
+    Compares amandas watched movies to friends watched movies to return list of friends unique watched movies
+    :params: dict - amandas_data: dataset containing amandas and friends watched movies
+    :returns: list - friends_unique_movies: list of movies only friends watched
+    """
+    # iterate through amandas watched movies
+    amandas_movies = []
+    for movie in amandas_data['watched']:
+        amandas_movies.append(movie)
+    # iterate through friends watched movies
+    friends_movies = []
+    for movies in amandas_data['friends']:
+        for movie in movies['watched']:
+            # assume movie not already in friends_movies
+            if movie not in friends_movies:
+                # add to friends_movies
+                friends_movies.append(movie)
+    # collect diff between amandas and friends
+    friends_unique_movies = []
+    for movie in friends_movies:
+        if movie not in amandas_movies:
+            friends_unique_movies.append(movie)
+    return friends_unique_movies
+
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
