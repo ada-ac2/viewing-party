@@ -11,6 +11,10 @@ MOVIE_TITLE_1 = "It Came from the Stack Trace"
 GENRE_1 = "Horror"
 RATING_1 = 3.5
 
+MOVIE_TITLE_2 = "Ratatouille"
+GENRE_2 = "Comedy"
+RATING_2 = 4.3
+
 #----------WAVE02-------------
 HORROR_1 = {
     "title": MOVIE_TITLE_1,
