@@ -11,12 +11,14 @@ def create_movie(title, genre, rating):
 
 
 def add_to_watched(user_data, movie):
-    watched_movie = user_data["watched"]  # watched_movie(value) is a list of dictionaries.
-    watched_movie.append(movie)
+    # TODO: Should we check if the movie is already in watched_movies?
+    watched_movies = user_data["watched"]  # watched_movies is a list of dictionaries.
+    watched_movies.append(movie)
     return user_data
 
 
 def add_to_watchlist(user_data, movie):
+    # TODO: Should we check if the movie is already in the watchlist?
     movie_watchlist = user_data["watchlist"] # movie_watchlist is a list of dictionaries.
     movie_watchlist.append(movie)
     return user_data
@@ -24,6 +26,7 @@ def add_to_watchlist(user_data, movie):
 
 def watch_movie(user_data, title):
     movie_watchlist = user_data["watchlist"]
+    # TODO: Should we check if the movie has already been watched?
     for index, movie in enumerate(movie_watchlist):
         movie_title = movie["title"]
         if title == movie_title:
@@ -46,8 +49,8 @@ def get_watched_avg_rating(user_data):
         rating = movie["rating"]
         amount += 1
         total_rating += rating
-    if amount:  # avoid zerodivisionerror
-        return total_rating/amount
+    if amount:  # avoid ZeroDivisionError
+        return total_rating / amount
     return total_rating
 
 
@@ -61,9 +64,9 @@ def get_most_watched_genre(user_data):
     max_amount = 0
     for genre, times in genre_map.items():
         # if there is a tie, keep the first
-            if times > max_amount:
-                max_amount = times
-                most_watched_genre = genre
+        if times > max_amount:
+            max_amount = times
+            most_watched_genre = genre
     return most_watched_genre
 
 
