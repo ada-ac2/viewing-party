@@ -134,4 +134,18 @@ def get_new_rec_by_genre(user_data):
 
 
 def get_rec_from_favorites(user_data):
+
+    #  if fav empty return list
+    if len(user_data["favorites"]) == 0:
+        return 
+
+    # empty watched list or favorites list, return []
+    if len(user_data["watched"]) == 0:
+        return []
+
+    # empty friends list, then use entire watched list
+
+    # other 
+    unique_watched = get_unique_watched(user_data)
+    # check if movie in user_data["favorites"]
     pass
