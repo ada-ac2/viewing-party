@@ -30,8 +30,6 @@ def watch_movie(user_data, title):
             return user_data
     return user_data
 
-# what if it already exists in watched_movie: ASK
-
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
@@ -134,18 +132,15 @@ def get_new_rec_by_genre(user_data):
 
 
 def get_rec_from_favorites(user_data):
-
-    #  if fav empty return list
-    if len(user_data["favorites"]) == 0:
-        return 
-
-    # empty watched list or favorites list, return []
     if len(user_data["watched"]) == 0:
         return []
 
-    # empty friends list, then use entire watched list
+    if len(user_data["friends"]) == 0:
+        return user_data["watched"]
 
-    # other 
     unique_watched = get_unique_watched(user_data)
-    # check if movie in user_data["favorites"]
-    pass
+    rec_from_favorites = []
+    for movie in unique_watched:
+        if movie in user_data["favorites"]:
+            rec_from_favorites.append(movie)
+    return rec_from_favorites
