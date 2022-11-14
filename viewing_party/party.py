@@ -59,8 +59,8 @@ def get_most_watched_genre(user_data):
         genre_map[genre] += 1
     most_watched_genre = None
     max_amount = 0
-    if genre_map:   # if it's not empty.
-        for genre, times in genre_map.items():  # assume there is only one most_watched_genre
+    for genre, times in genre_map.items():
+        # if there is a tie, keep the first
             if times > max_amount:
                 max_amount = times
                 most_watched_genre = genre
