@@ -90,7 +90,8 @@ def get_friends_unique_watched(user_data):
     for f in user_data["friends"]:
         for m in f["watched"]:
             friends_watched.append(m)
-    friends_watched_nd = []
+    # remove duplicates
+    friends_watched_nd = list()
     [friends_watched_nd.append(i) for i in friends_watched if i not in friends_watched_nd]
     unique = [i for i in friends_watched_nd if i not in user_watched]
     return unique
@@ -99,8 +100,24 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
+def get_available_recs(user_data):
+    recs = list()
+    friends_watched = list()
+    for f in user_data["friends"]:
+        for m in f["watched"]:
+            friends_watched.append(m)
+    # remove duplicates
+    friends_watched_nd = list()
+    [friends_watched_nd.append(i) for i in friends_watched if i not in friends_watched_nd]
+
+    if (len(user_data["subscriptions"])!=0) and (len(friends_watched)!=0):
+        for i in friends_watched_nd:
+            if i["host"] in user_data["subscriptions"] and i not in user_data["watched"]:
+                recs.append(i)
+    return recs
+
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
-
+def
