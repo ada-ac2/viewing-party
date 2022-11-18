@@ -71,10 +71,8 @@ def get_most_watched_genre(user_data):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 def get_unique_watched(user_data):
-    user_watched = list()
+    user_watched = user_data["watched"]
     friends_watched = list()
-    for u in user_data["watched"]:
-        user_watched.append(u)
     for f in user_data["friends"]:
         for m in f["watched"]:
             friends_watched.append(m)
@@ -83,10 +81,8 @@ def get_unique_watched(user_data):
 
 
 def get_friends_unique_watched(user_data):
-    user_watched = list()
+    user_watched = user_data["watched"]
     friends_watched = list()
-    for u in user_data["watched"]:
-        user_watched.append(u)
     for f in user_data["friends"]:
         for m in f["watched"]:
             friends_watched.append(m)
@@ -130,14 +126,14 @@ def get_new_rec_by_genre(user_data):
     return recs
 
 def get_rec_from_favorites(user_data):
-    friends_watched = get_friends_unique_watched(user_data)
-    # print("\n")
-    # print(user_data["favorites"])
-    # print("\n")
-    # for i in friends_watched:
-    #     print(i)
+    friends_watched = list()
+    for f in user_data["friends"]:
+        for m in f["watched"]:
+            if m not in friends_watched:
+                friends_watched.append(m)
+    watched = get_unique_watched(user_data)
     recs = list()
     for i in user_data["favorites"]:
-        if i not in friends_watched:
+        if i not in friends_watched or i in watched:
             recs.append(i)
     return recs
